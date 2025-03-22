@@ -5,6 +5,11 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "rootDir": "./app"
-  }
+    "rootDir": "./app",
+    "outDir": "./dist",
+    "strict": true
+  },
+  "include": [
+    "app/**/*.ts" 
+  ]
 }
