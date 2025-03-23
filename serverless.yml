@@ -8,7 +8,7 @@ service: api-bestsellers
 stages:
   default:
     params:
-      tableName: "users-table-${sls:stage}"
+      tableName: "bestsellers-table-${sls:stage}"
 
 provider:
   name: aws
@@ -25,11 +25,11 @@ provider:
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
           Resource:
-            - Fn::GetAtt: [UsersTable, Arn]
+            - Fn::GetAtt: [BestSellersTable, Arn]
   environment:
     USERS_TABLE: ${param:tableName}
 
-functions:
+functions:      
   api:
     handler: app/handlers/handler.handler
     events:
@@ -41,10 +41,10 @@ resources:
       Type: AWS::DynamoDB::Table
       Properties:
         AttributeDefinitions:
-          - AttributeName: userId
+          - AttributeName: bestSellerId
             AttributeType: S
         KeySchema:
-          - AttributeName: userId
+          - AttributeName: bestSellerId
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
         TableName: ${param:tableName}
