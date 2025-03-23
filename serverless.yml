@@ -37,7 +37,7 @@ functions:
 
 resources:
   Resources:
-    UsersTable:
+    BestSellersTable:
       Type: AWS::DynamoDB::Table
       Properties:
         AttributeDefinitions:
