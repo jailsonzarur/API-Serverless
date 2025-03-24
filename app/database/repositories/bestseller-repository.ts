@@ -12,7 +12,7 @@ export class BestSellerRepository {
     
     const best_seller_record: BestSeller = {
       bestSellerId: uuidv4(),
-      extraction_date: new Date().toISOString(),
+      scraping_date: new Date().toISOString(),
       top3: top3
     }
     
@@ -25,7 +25,7 @@ export class BestSellerRepository {
   async get_last_top3_bestsellers(){
     const data = await dynamoDB.send(new ScanCommand({
       TableName: this.tableName,
-      ProjectionExpression: "bestSellerId, extraction_date, top3", 
+      ProjectionExpression: "bestSellerId, scraping_date, top3", 
     }));
 
     if (!data.Items || data.Items.length === 0) {
@@ -33,15 +33,35 @@ export class BestSellerRepository {
     }
 
     const ordered_date = data.Items.sort((a, b) => {
-      const dateA = new Date(a.extraction_date);
-      const dateB = new Date(b.extraction_date);
+      const dateA = new Date(a.scraping_date);
+      const dateB = new Date(b.scraping_date);
       return dateB.getTime() - dateA.getTime(); 
     });
 
     return {
-      extraction_date: ordered_date[0].extraction_date,
+      scraping_date: ordered_date[0].scraping_date,
       top3: ordered_date[0].top3
     };
+  }
+
+  async get_all_top3_bestsellers(){
+    const data = await dynamoDB.send(new ScanCommand({
+      TableName: this.tableName,
+      ProjectionExpression: "bestSellerId, scraping_date, top3", 
+    }));
+
+    if (!data.Items || data.Items.length === 0) {
+      return null;
+    }
+
+    const all_best_sellers = data.Items.map((item) => {
+      return {
+        scraping_date: item.scraping_date,
+        top3: item.top3
+      }
+    })
+
+    return all_best_sellers;
   }
 
 }
