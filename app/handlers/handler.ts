@@ -1,6 +1,9 @@
+import { httpResponse } from "../utils/HttpResponses";
+
 export async function handler(event: any) {
-    return {
-        statusCode: 200,
-        body: JSON.stringify({"message": "Hello!"})
+    try {
+        return httpResponse.success(null)
+    } catch(error) {
+        return httpResponse.error("Internal Server Error")
     }
 }
