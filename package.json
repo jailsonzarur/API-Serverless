@@ -13,6 +13,7 @@
   "devDependencies": {
     "@types/aws-lambda": "^8.10.147",
     "@types/puppeteer": "^5.4.7",
+    "@types/uuid": "^10.0.0",
     "typescript": "^5.8.2"
   },
   "dependencies": {
@@ -21,6 +22,9 @@
     "@sparticuz/chromium": "^133.0.0",
     "dotenv": "^16.4.7",
     "puppeteer": "^24.4.0",
-    "puppeteer-core": "^24.4.0"
+    "puppeteer-core": "19.6",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "uuid": "^11.1.0"
   }
 }
