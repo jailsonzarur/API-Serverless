@@ -1,6 +1,8 @@
 import puppeteer from "puppeteer";
-import { dynamoDB, BEST_SELLERS_TABLE } from "../database/config";
-import { PutCommand } from "@aws-sdk/lib-dynamodb";
+import { Product } from "../database/models/product";
+import { BestSellerRepository } from "../database/repositories/bestseller-repository";
+
+const repository = new BestSellerRepository();
 
 (async () => {
     const browser = await puppeteer.launch({ headless: false }); 
@@ -22,24 +24,23 @@ import { PutCommand } from "@aws-sdk/lib-dynamodb";
         ));
     });
 
-    if (products) {
-        let num = 0;
-        for (const product of products) {
-            console.log(`Nome: ${product.name}, Preço: ${product.price}, Avaliações: ${product.rating}`)
-            const params = {
-                TableName: BEST_SELLERS_TABLE,
-                Item: {
-                    bestSellerId: String(num),
-                    name: product.name,
-                    price: product.price,
-                    rating: product.rating
-                }
-            }
+    const top3_products: Product[] = [];
 
-            await dynamoDB.send(new PutCommand(params))
-            console.log("Item inserido com sucesso!")
-            num = num + 1
+    if (products) {
+        for (const product of products) {
+
+            console.log(`Nome: ${product.name}, Preço: ${product.price}, Avaliações: ${product.rating}`)
+            top3_products.push({
+                name: product.name,
+                price: product.price,
+                rating: product.rating
+            })
+
         }
+
+        await repository.add_top3_bestsellers(top3_products);
+
+        console.log("Item inserido com sucesso!")
     } else {
         console.log('Elemento não encontrado.');
     }
