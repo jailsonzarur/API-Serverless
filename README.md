@@ -1,5 +1,39 @@
 # DesafioBGC-Brasil
 
+## Introdução
+
+Este projeto implementa uma API Serverless para capturar os bestsellers da Amazon usando Web Scraping. A extração dos dados ocorre localmente, e os resultados são armazenados no DynamoDB.
+
+### Como funciona?
+O Web Scraper captura informações da página de mais vendidos da Amazon.
+
+Os dados são salvos no DynamoDB, registrando:
+
+  - Data da extração (extraction_date): timestamp em formato string, que indica o exato momento em que aquele processo de extração ocorreu.
+  - Top 3 produtos (top3): lista com os três produtos mais vendidos no momento da extração.
+
+Cada produto contém:
+
+  - Nome do produto.
+  - Avaliação (rating).
+  - Preço no momento da extração.
+
+O endpoint(/best-sellers) da API retorna a última extração disponível, incluindo a data e os produtos extraídos.
+
+### Diferencial
+Diferente de abordagens que apenas sobrescrevem os dados com os produtos mais vendidos do momento, este projeto mantém um histórico das extrações.
+
+Cada extração feita pelo Web Scraper gera um novo registro no banco de dados.
+
+O que isso significa na prática?
+
+Você pode consultar todas as extrações feitas no passado e analisar como os produtos mais vendidos mudaram ao longo do tempo.
+
+O banco de dados não contém apenas os produtos mais vendidos no momento atual, mas sim um histórico das extrações, permitindo análises mais detalhadas sobre tendências de mercado.
+
+Essa abordagem permite que sua API ofereça insights sobre variações dos bestsellers ao longo do tempo.
+
+
 ## Guia de Instalação e Configuração do Projeto Serverless
 
 ### 1. Pré-requisitos
