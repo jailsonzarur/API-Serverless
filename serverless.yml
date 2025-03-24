@@ -32,16 +32,28 @@ provider:
 functions:      
   api:
     handler: app/handlers/handler.handler
+    description: Health Check
     events:
-      - httpApi: "*"
-  getBestSellers:
-    handler: app/handlers/getBestSellers.handler
-    description: Get Top 3 best Sellers of Amazon
+      - http:
+          path: /
+          method: get
+  getLastBestSellers:
+    handler: app/handlers/getLastBestSellers.handler
+    description: Get Last Scraping of Best Seller from Amazon
     environment:
       BEST_SELLERS_TABLE: ${param:tableName}
     events:
       - http:
-          path: /best-sellers
+          path: /last-best-sellers-scraping
+          method: get
+  getAllBestSellers:
+    handler: app/handlers/getAllBestSellers.handler
+    description: Get All Best Seller Scrapings from Amazon
+    environment:
+      BEST_SELLERS_TABLE: ${param:tableName}
+    events:
+      - http:
+          path: /all-best-sellers-scraping
           method: get
 
 resources:
