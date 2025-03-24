@@ -9,7 +9,7 @@ O Web Scraper captura informações da página de mais vendidos da Amazon.
 
 Os dados são salvos no DynamoDB, registrando:
 
-  - Data da extração (extraction_date): timestamp em formato string, que indica o exato momento em que aquele processo de extração ocorreu.
+  - Data da extração (scraping_date): timestamp em formato string, que indica o exato momento em que aquele processo de extração ocorreu.
   - Top 3 produtos (top3): lista com os três produtos mais vendidos no momento da extração.
 
 Cada produto contém:
