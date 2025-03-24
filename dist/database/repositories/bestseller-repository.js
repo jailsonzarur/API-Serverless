@@ -21,7 +21,7 @@ class BestSellerRepository {
         return __awaiter(this, void 0, void 0, function* () {
             const best_seller_record = {
                 bestSellerId: (0, uuid_1.v4)(),
-                dataExtracao: new Date().toISOString(),
+                scraping_date: new Date().toISOString(),
                 top3: top3
             };
             yield config_1.dynamoDB.send(new lib_dynamodb_1.PutCommand({
@@ -30,16 +30,42 @@ class BestSellerRepository {
             }));
         });
     }
-    buscarTop3MaisRecente() {
+    get_last_top3_bestsellers() {
         return __awaiter(this, void 0, void 0, function* () {
             const data = yield config_1.dynamoDB.send(new lib_dynamodb_1.ScanCommand({
                 TableName: this.tableName,
-                ProjectionExpression: "bestSellerId, dataExtracao, top3",
+                ProjectionExpression: "bestSellerId, scraping_date, top3",
             }));
             if (!data.Items || data.Items.length === 0) {
                 return null;
             }
-            return data.Items[0].top3;
+            const ordered_date = data.Items.sort((a, b) => {
+                const dateA = new Date(a.scraping_date);
+                const dateB = new Date(b.scraping_date);
+                return dateB.getTime() - dateA.getTime();
+            });
+            return {
+                scraping_date: ordered_date[0].scraping_date,
+                top3: ordered_date[0].top3
+            };
+        });
+    }
+    get_all_top3_bestsellers() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const data = yield config_1.dynamoDB.send(new lib_dynamodb_1.ScanCommand({
+                TableName: this.tableName,
+                ProjectionExpression: "bestSellerId, scraping_date, top3",
+            }));
+            if (!data.Items || data.Items.length === 0) {
+                return null;
+            }
+            const all_best_sellers = data.Items.map((item) => {
+                return {
+                    scraping_date: item.scraping_date,
+                    top3: item.top3
+                };
+            });
+            return all_best_sellers;
         });
     }
 }

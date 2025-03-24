@@ -7,7 +7,7 @@ require("dotenv/config");
 const client = new client_dynamodb_1.DynamoDBClient({
     region: "us-east-1",
 });
-const BEST_SELLERS_TABLE = process.env.BEST_SELLERS_TABLE;
+const BEST_SELLERS_TABLE = "bestsellers-table-dev";
 exports.BEST_SELLERS_TABLE = BEST_SELLERS_TABLE;
 const dynamoDB = lib_dynamodb_1.DynamoDBDocumentClient.from(client);
 exports.dynamoDB = dynamoDB;
