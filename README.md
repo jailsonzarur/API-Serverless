@@ -41,9 +41,9 @@ Esta tabela apresenta os endpoints da API, suas respectivas URLs, exemplos de en
 
 | Tipo       | URL                                               | Exemplo de Saída                                      | Descrição |
 | ---------- | ------------------------------------------------- | ------------------------------------------------------| --------- |
-| **GET**   | `/dev/last-best-sellers-scraping`                  | `{"success": true,"data": {}}`                        | Criação de um novo usuário. |
-| **GET**   | `/dev/all-best-sellers-scraping`                   | `{"success": true,"data": [{}]}`                      | Autenticação do usuário e geração de token. |
-| **GET**    | `/dev/`                                           | `{"success": true,"data": null}`                      | Obtém informações do usuário autenticado. |
+| **GET**   | `/dev/last-best-sellers-scraping`                  | `{"success": true,"data": {}}`                        | Retorna o último scraping feito.   |
+| **GET**   | `/dev/all-best-sellers-scraping`                   | `{"success": true,"data": [{}]}`                      | Retorna todos os scrapings feitos. |
+| **GET**    | `/dev/`                                           | `{"success": true,"data": null}`                      | Health Check.                      |
 
 
 ## Guia de Instalação e Configuração do Projeto Serverless
