@@ -1,6 +1,16 @@
 # DesafioBGC-Brasil
 
-## Endpoint: https://t5c18258d7.execute-api.us-east-1.amazonaws.com/dev/
+## Endpoint: https://t5c18258d7.execute-api.us-east-1.amazonaws.com
+
+## Documentação da API
+
+Esta tabela apresenta os endpoints da API, suas respectivas URLs, exemplos de entrada, os métodos HTTP utilizados e uma breve descrição de suas funcionalidades.
+
+| Tipo       | URL                                               | Exemplo de Saída                                      | Descrição |
+| ---------- | ------------------------------------------------- | ------------------------------------------------------| --------- |
+| **GET**   | `/dev/last-best-sellers-scraping`                  | `{"success": true,"data": {}}`                        | Retorna o último scraping feito.   |
+| **GET**   | `/dev/all-best-sellers-scraping`                   | `{"success": true,"data": [{}]}`                      | Retorna todos os scrapings feitos. |
+| **GET**    | `/dev/`                                           | `{"success": true,"data": null}`                      | Health Check.                      |
 
 ## Introdução
 
@@ -34,17 +44,6 @@ Você pode consultar todas as extrações feitas no passado e analisar como os p
 O banco de dados não contém apenas os produtos mais vendidos no momento atual, mas sim um histórico das extrações, permitindo análises mais detalhadas sobre tendências de mercado.
 
 Essa abordagem permite que sua API ofereça insights sobre variações dos bestsellers ao longo do tempo.
-
-## Documentação da API
-
-Esta tabela apresenta os endpoints da API, suas respectivas URLs, exemplos de entrada, os métodos HTTP utilizados e uma breve descrição de suas funcionalidades.
-
-| Tipo       | URL                                               | Exemplo de Saída                                      | Descrição |
-| ---------- | ------------------------------------------------- | ------------------------------------------------------| --------- |
-| **GET**   | `/dev/last-best-sellers-scraping`                  | `{"success": true,"data": {}}`                        | Retorna o último scraping feito.   |
-| **GET**   | `/dev/all-best-sellers-scraping`                   | `{"success": true,"data": [{}]}`                      | Retorna todos os scrapings feitos. |
-| **GET**    | `/dev/`                                           | `{"success": true,"data": null}`                      | Health Check.                      |
-
 
 ## Guia de Instalação e Configuração do Projeto Serverless
 
