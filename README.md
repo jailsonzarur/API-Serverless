@@ -1,6 +1,6 @@
 # DesafioBGC-Brasil
 
-## Endpoint: https://bqsi68qfaf.execute-api.us-east-1.amazonaws.com
+## Endpoint: https://t5c18258d7.execute-api.us-east-1.amazonaws.com/dev/
 
 ## Introdução
 
