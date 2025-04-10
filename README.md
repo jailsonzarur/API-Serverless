@@ -1,7 +1,3 @@
-# DesafioBGC-Brasil
-
-## Endpoint: https://t5c18258d7.execute-api.us-east-1.amazonaws.com
-
 ## Documentação da API
 
 Esta tabela apresenta os endpoints da API, suas respectivas URLs, exemplos de entrada, os métodos HTTP utilizados e uma breve descrição de suas funcionalidades.
